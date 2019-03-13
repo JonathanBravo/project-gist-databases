@@ -9,9 +9,9 @@ def import_gists_to_database(db, username, commit=True):
                 forks_url,public,created_at,updated_at,comments,updated_at,comments,comments_url) 
                 VALUES (?,?,?,?,?,?,?,?,?,?,?)"""
     for gist in list_of_gists:
-        db.execute(query, gist['id'],gist['html_url'],
+        db.execute(query, [gist['id'],gist['html_url'],
                 gist['git_pull_url'],gist['git_push_url'],gist['commits_url'],
                 gist['forks_url'],gist['public'],gist['created_at'],gist['updated_at'],
-                gist['comments'],gist['comments_url'])
+                gist['comments'],gist['comments_url']])
     if commit == True:
         db.commit()
