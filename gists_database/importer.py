@@ -4,6 +4,8 @@ import sqlite3
 def import_gists_to_database(db, username, commit=True):
     url = 'https://api.github.com/users/{username}/gists'.format(username=username)
     response = requests.get(url)
+    response.raise_for_status()
+    
     list_of_gists = response.json()
     query = """INSERT INTO gists (github_id,html_url,git_pull_url,git_push_url,commits_url,
                 forks_url,public,created_at,updated_at,comments,comments_url) 
